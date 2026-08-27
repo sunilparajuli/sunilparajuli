@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { personalInfo } from '../data/portfolioData';
 
 export const metadata: Metadata = {
-  title: `${personalInfo.name} | Solution Architect & Health Informatics Specialist`,
-  description: personalInfo.bio,
+  title: 'Sunil Parajuli — Technology for systems that serve people',
+  description: 'Portfolio of Sunil Parajuli, software architect and social protection technologist building interoperable public systems.',
   keywords: [
     'Sunil Parajuli',
     'Solution Architect',
@@ -23,18 +23,26 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://sunilparajuli.com',
-    title: `${personalInfo.name} - Solution Architect & Health Informatics Specialist`,
+    title: 'Sunil Parajuli — Technology for systems that serve people',
     description: personalInfo.bio,
-    siteName: `${personalInfo.name} Portfolio`,
+    siteName: 'Sunil Parajuli Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${personalInfo.name} - Solution Architect`,
+    title: 'Sunil Parajuli — Solution Architect',
     description: personalInfo.bio,
   },
   icons: {
     icon: '/favicon.ico',
   },
+};
+
+export const viewport: Viewport = {
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#FAF8F5' },
+    { media: '(prefers-color-scheme: dark)', color: '#0B100E' },
+  ],
 };
 
 export default function RootLayout({
@@ -43,8 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-neutral-950 text-slate-100 antialiased selection:bg-emerald-400 selection:text-neutral-950">
+    <html lang="en" className="bg-background">
+      <body className="font-sans antialiased text-foreground bg-background selection:bg-accent selection:text-accent-foreground">
         {children}
       </body>
     </html>

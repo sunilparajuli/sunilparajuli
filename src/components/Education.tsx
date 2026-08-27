@@ -2,91 +2,71 @@
 
 import React from 'react';
 import { educationList } from '../data/portfolioData';
-import { GraduationCap, Award, BookOpen, ExternalLink, FileText, CheckCircle2, Languages } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, ExternalLink, Languages } from 'lucide-react';
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 bg-neutral-950 relative border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="education" className="border-b border-border bg-secondary/30">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-emerald-400"></span>
-              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
-                04 // Academic Pedigree & Research
-              </span>
-            </div>
-            <h2 className="text-4xl sm:text-6xl font-black font-display tracking-tight text-white uppercase">
-              Education & <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-emerald-400">
-                Applied Research
-              </span>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[.18em] text-accent font-semibold">
+              Academic foundation & research
+            </p>
+            <h2 className="text-4xl font-semibold tracking-[-.05em] sm:text-6xl text-foreground">
+              Education & Thesis.
             </h2>
           </div>
 
-          <p className="text-sm text-neutral-400 max-w-md font-light">
-            Combining formal computer engineering foundations with advanced e-Governance and machine learning research applied directly to public health financing.
+          <p className="text-sm text-muted-foreground max-w-sm">
+            Rigorous engineering fundamentals coupled with applied e-Governance and machine learning research in health financing.
           </p>
         </div>
 
-        {/* Education Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        {/* Education Grid */}
+        <div className="grid gap-6 lg:grid-cols-2 mb-12">
           {educationList.map((edu, idx) => (
             <div
               key={edu.id}
-              className="p-8 rounded-3xl bg-neutral-900/60 border border-white/10 hover:border-emerald-500/40 transition-all duration-300 relative overflow-hidden flex flex-col justify-between"
+              className="border border-border bg-background p-6 sm:p-8 flex flex-col justify-between"
             >
-              {/* Highlight badge for Master's */}
-              {edu.grade && (
-                <div className="absolute top-6 right-6">
-                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-400/10 text-emerald-400 border border-emerald-400/30 flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5" />
-                    GPA {edu.grade.split(':')[1]?.trim() || '3.76/4.0'}
-                  </span>
-                </div>
-              )}
-
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
-                    <GraduationCap className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider block">
-                      {edu.period} • {edu.eqfLevel}
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                    {edu.period} · {edu.eqfLevel}
+                  </span>
+                  {edu.grade && (
+                    <span className="font-mono text-xs uppercase bg-accent text-accent-foreground font-bold px-2.5 py-0.5">
+                      {edu.grade}
                     </span>
-                    <span className="text-xs font-mono text-emerald-400 font-semibold">
-                      {edu.institution}
-                    </span>
-                  </div>
+                  )}
                 </div>
 
-                <h3 className="text-2xl font-bold font-display text-white mb-4 pr-16">
+                <p className="font-mono text-xs uppercase tracking-wider text-accent font-semibold mb-1">
+                  {edu.institution}
+                </p>
+
+                <h3 className="text-xl font-semibold text-foreground tracking-tight mb-4">
                   {edu.degree}
                 </h3>
 
                 {edu.thesis && (
-                  <div className="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 mb-6">
-                    <div className="flex items-start gap-2.5">
-                      <BookOpen className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider font-bold block mb-1">
-                          Graduate Thesis (9 Credits)
-                        </span>
-                        <p className="text-xs text-neutral-200 font-light leading-relaxed">
-                          {edu.thesis.replace('Ongoing Thesis (9 Credits): ', '')}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="p-4 bg-secondary border-l-2 border-accent mb-5 text-xs font-mono">
+                    <span className="text-accent uppercase font-bold block mb-1">
+                      Graduate Thesis (9 Credits)
+                    </span>
+                    <p className="text-foreground font-sans font-medium">
+                      {edu.thesis.replace('Ongoing Thesis (9 Credits): ', '')}
+                    </p>
                   </div>
                 )}
 
-                <div className="space-y-2 mb-6">
+                <div className="space-y-1.5 mb-6">
                   {edu.details.map((detail, dIdx) => (
-                    <div key={dIdx} className="flex items-start gap-2 text-xs text-neutral-400">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-neutral-500 shrink-0 mt-0.5" />
+                    <div key={dIdx} className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <span className="text-accent">→</span>
                       <span>{detail}</span>
                     </div>
                   ))}
@@ -94,84 +74,75 @@ export default function Education() {
               </div>
 
               {edu.website && (
-                <div className="pt-4 border-t border-white/5 flex justify-end">
+                <div className="pt-4 border-t border-border flex justify-end">
                   <a
                     href={edu.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-mono text-neutral-400 hover:text-emerald-400 flex items-center gap-1.5 transition-colors"
+                    className="font-mono text-xs text-muted-foreground hover:text-accent flex items-center gap-1.5 transition-colors"
                   >
-                    <span>Visit Institution</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>{edu.website.replace('https://', '')}</span>
+                    <ExternalLink className="size-3 text-accent" />
                   </a>
                 </div>
               )}
             </div>
           ))}
 
-          {/* Language & Competency Card */}
-          <div className="p-8 rounded-3xl bg-neutral-900/60 border border-white/10 flex flex-col justify-between">
+          {/* Language & Stakeholder Engagement Card */}
+          <div className="border border-border bg-background p-6 sm:p-8 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400">
-                  <Languages className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider block">
-                    Communication & Multilingual
-                  </span>
-                  <span className="text-sm font-bold text-white font-display">
-                    Language Competencies
-                  </span>
-                </div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                  CEFR Certified & Working
+                </span>
+                <span className="font-mono text-xs uppercase bg-secondary text-secondary-foreground border border-border px-2.5 py-0.5 font-semibold">
+                  Multilingual
+                </span>
               </div>
 
-              <div className="space-y-4 text-xs font-mono">
-                <div className="p-4 rounded-2xl bg-neutral-950/80 border border-white/5 flex items-center justify-between">
+              <p className="font-mono text-xs uppercase tracking-wider text-accent font-semibold mb-1">
+                Communication Competencies
+              </p>
+
+              <h3 className="text-xl font-semibold text-foreground tracking-tight mb-6">
+                Language & Cross-Cultural Advisory
+              </h3>
+
+              <div className="space-y-3 font-mono text-xs">
+                <div className="flex items-center justify-between p-3 bg-secondary border border-border">
                   <div>
-                    <span className="text-white font-bold block text-sm">English</span>
-                    <span className="text-neutral-500 text-[11px]">CEFR Level C1 • Professional & Academic</span>
+                    <span className="font-bold text-foreground block">English</span>
+                    <span className="text-[10px] text-muted-foreground">C1 Proficient · Technical, Academic & Leadership</span>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold">
-                    C1 Advanced
-                  </span>
+                  <span className="bg-primary text-primary-foreground px-2 py-0.5 font-bold">C1 Level</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-neutral-950/80 border border-white/5 flex items-center justify-between">
+                <div className="flex items-center justify-between p-3 bg-secondary border border-border">
                   <div>
-                    <span className="text-white font-bold block text-sm">Nepali</span>
-                    <span className="text-neutral-500 text-[11px]">Native Proficiency</span>
+                    <span className="font-bold text-foreground block">Nepali</span>
+                    <span className="text-[10px] text-muted-foreground">Native · Full National Policy & Technical Proficiency</span>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold">
-                    Native
-                  </span>
+                  <span className="bg-accent text-accent-foreground px-2 py-0.5 font-bold">Native</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-neutral-950/80 border border-white/5 flex items-center justify-between">
+                <div className="flex items-center justify-between p-3 bg-secondary border border-border">
                   <div>
-                    <span className="text-white font-bold block text-sm">Hindi</span>
-                    <span className="text-neutral-500 text-[11px]">Full Working & Conversational</span>
+                    <span className="font-bold text-foreground block">Hindi</span>
+                    <span className="text-[10px] text-muted-foreground">Working & Conversational Interoperability</span>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-neutral-800 text-neutral-300 border border-white/10 font-bold">
-                    Fluent
-                  </span>
+                  <span className="bg-background text-foreground border border-border px-2 py-0.5 font-bold">Fluent</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-white/5 mt-6">
-              <span className="text-xs font-mono text-neutral-400 block mb-2">Interpersonal Strengths</span>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 text-neutral-300 border border-white/5">
-                  High-Level Stakeholder Engagement
-                </span>
-                <span className="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 text-neutral-300 border border-white/5">
-                  Technical Workshop Facilitation
-                </span>
-                <span className="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 text-neutral-300 border border-white/5">
-                  Cross-Cultural Teams (Asia, Africa, Europe)
-                </span>
-              </div>
+            <div className="pt-6 border-t border-border mt-6">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground block mb-2">
+                High-Level Engagement
+              </span>
+              <p className="text-xs text-muted-foreground">
+                Extensive experience facilitating inter-ministerial technical workshops across Asia and Africa with WHO, GIZ, ILO, and ministries of health.
+              </p>
             </div>
           </div>
         </div>

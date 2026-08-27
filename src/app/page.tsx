@@ -3,8 +3,8 @@
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Marquee from '../components/Marquee';
-import About from '../components/About';
 import Projects from '../components/Projects';
+import About from '../components/About';
 import Experience from '../components/Experience';
 import Education from '../components/Education';
 import Skills from '../components/Skills';
@@ -13,12 +13,12 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-neutral-950 text-white selection:bg-emerald-400 selection:text-neutral-950">
+    <main className="min-h-screen overflow-hidden bg-background text-foreground selection:bg-accent selection:text-accent-foreground">
       <Navbar />
       <Hero />
       <Marquee />
-      <About />
       <Projects />
+      <About />
       <Experience />
       <Education />
       <Skills />

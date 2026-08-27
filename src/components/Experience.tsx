@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { experiences } from '../data/portfolioData';
-import { Briefcase, Calendar, MapPin, CheckCircle2, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+import { MapPin, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
 
 export default function Experience() {
   const [expandedId, setExpandedId] = useState<string | null>(experiences[0]?.id || null);
@@ -12,118 +12,96 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="py-24 bg-neutral-900/50 relative border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="border-b border-border bg-background">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="mb-12 flex items-center justify-between">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-emerald-400"></span>
-              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
-                03 // Career Trajectory
-              </span>
-            </div>
-            <h2 className="text-4xl sm:text-6xl font-black font-display tracking-tight text-white uppercase">
-              Professional <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-emerald-400">
-                Experience Timeline
-              </span>
+            <p className="mb-2 font-mono text-xs uppercase tracking-[.18em] text-accent font-semibold">
+              Career progression
+            </p>
+            <h2 className="text-3xl font-semibold tracking-[-.05em] sm:text-5xl text-foreground">
+              Experience
             </h2>
           </div>
-
-          <p className="text-sm text-neutral-400 max-w-md font-light">
-            A progressive record of technical leadership, international health informatics consultancy, and full-stack enterprise engineering.
-          </p>
+          <span className="font-mono text-xs text-muted-foreground border border-border px-3 py-1 bg-secondary/50">
+            2016 — 2026
+          </span>
         </div>
 
-        {/* Timeline List */}
-        <div className="space-y-4">
-          {experiences.map((exp, index) => {
+        {/* Roles Divide Grid */}
+        <div className="divide-y divide-border border-y border-border">
+          {experiences.map((exp) => {
             const isExpanded = expandedId === exp.id;
 
             return (
-              <div
+              <article
                 key={exp.id}
-                className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
-                  isExpanded
-                    ? 'bg-neutral-950 border-emerald-500/40 shadow-2xl shadow-emerald-500/5'
-                    : 'bg-neutral-950/60 hover:bg-neutral-950/90 border-white/10 hover:border-white/20'
-                }`}
+                onClick={() => toggleExpand(exp.id)}
+                className="group py-7 cursor-pointer transition-colors hover:bg-secondary/20 select-none"
               >
-                {/* Header Row (Clickable) */}
-                <div
-                  onClick={() => toggleExpand(exp.id)}
-                  className="p-6 sm:p-8 cursor-pointer flex flex-col lg:flex-row lg:items-center justify-between gap-4 select-none"
-                >
-                  <div className="space-y-1.5 flex-1">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-white/5 text-emerald-400 border border-white/10">
-                        {exp.type}
-                      </span>
-                      <span className="text-xs font-mono text-neutral-400 flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-neutral-500" />
-                        {exp.location}
-                      </span>
-                    </div>
+                <div className="grid gap-4 md:grid-cols-[.7fr_1.1fr_1.2fr] md:gap-8 items-start">
+                  
+                  {/* Period & Type */}
+                  <div>
+                    <p className="font-mono text-xs text-foreground font-semibold">
+                      {exp.period}
+                    </p>
+                    <span className="mt-1 inline-block font-mono text-[10px] uppercase text-muted-foreground bg-secondary px-2 py-0.5 border border-border">
+                      {exp.type}
+                    </span>
+                  </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-emerald-400 transition-colors">
-                      {exp.role}
+                  {/* Role, Company, Location */}
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground group-hover:text-accent transition-colors flex items-center gap-2">
+                      <span>{exp.role}</span>
+                      {isExpanded ? <ChevronUp className="size-3.5 text-accent" /> : <ChevronDown className="size-3.5 text-muted-foreground" />}
                     </h3>
-                    <p className="text-sm font-mono text-neutral-400 font-medium">
+                    <p className="mt-1 text-sm font-medium text-accent">
                       {exp.company}
                     </p>
+                    <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground font-mono">
+                      <MapPin className="size-3" />
+                      {exp.location}
+                    </p>
                   </div>
 
-                  <div className="flex items-center justify-between lg:justify-end gap-6 pt-2 lg:pt-0 border-t lg:border-t-0 border-white/5">
-                    <span className="text-xs font-mono text-neutral-300 font-semibold px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-                      {exp.period}
-                    </span>
-                    <div className="p-2 rounded-full bg-white/5 text-neutral-400 hover:text-white">
-                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Expanded Details Body */}
-                {isExpanded && (
-                  <div className="px-6 pb-8 sm:px-8 pt-2 border-t border-white/5 space-y-6 animate-in slide-in-from-top-2 duration-200">
-                    <p className="text-sm text-neutral-300 font-light leading-relaxed">
+                  {/* Summary */}
+                  <div>
+                    <p className="text-sm leading-6 text-muted-foreground font-light">
                       {exp.description}
                     </p>
+                  </div>
 
-                    <div className="space-y-3">
-                      <h4 className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold">
-                        Key Responsibilities & Deliverables
-                      </h4>
-                      <div className="space-y-2">
-                        {exp.achievements.map((ach, i) => (
-                          <div key={i} className="flex items-start gap-2.5 text-sm text-neutral-300">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                            <span>{ach}</span>
-                          </div>
-                        ))}
-                      </div>
+                </div>
+
+                {/* Expanded Achievements & Tech */}
+                {isExpanded && (
+                  <div className="mt-6 pt-6 border-t border-border/60 pl-0 md:pl-[calc(24%+2rem)] space-y-4 animate-in fade-in duration-200">
+                    <div className="space-y-2">
+                      {exp.achievements.map((ach, i) => (
+                        <div key={i} className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground">
+                          <span className="text-accent font-bold">→</span>
+                          <span>{ach}</span>
+                        </div>
+                      ))}
                     </div>
 
-                    <div className="pt-2">
-                      <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-500 font-bold mb-2">
-                        Technologies Deployed
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 text-neutral-300 border border-white/10"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {exp.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-0.5 text-[10px] font-mono bg-secondary text-foreground border border-border"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 )}
-              </div>
+              </article>
             );
           })}
         </div>
