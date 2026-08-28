@@ -2,18 +2,20 @@
 
 import React, { useState } from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { ArrowUpRight, Mail, Copy, Check, Send, Download, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Mail, Copy, Check, Send, Download, MapPin, Phone, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    honeypot: '', // bot trap
   });
 
   const copyToClipboard = (text: string, type: 'email' | 'phone') => {
@@ -27,17 +29,38 @@ export default function Contact() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage('');
 
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to dispatch message. Please try again.');
+      }
+
       setStatus('success');
-      const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Website Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-      window.open(mailtoUrl, '_blank');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
-    }, 600);
+      setFormData({ name: '', email: '', subject: '', message: '', honeypot: '' });
+    } catch (err: any) {
+      console.error('Contact submission error:', err);
+      setStatus('error');
+      setErrorMessage(err.message || 'Something went wrong. Please use direct email below.');
+    }
+  };
+
+  const handleMailtoFallback = () => {
+    const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Website Architecture Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    window.open(mailtoUrl, '_blank');
   };
 
   return (
@@ -57,7 +80,7 @@ export default function Contact() {
         {/* Contact Grid */}
         <div className="grid gap-12 lg:grid-cols-12 items-start">
           
-          {/* Left Column: Direct Links & Info */}
+          {/* Left Column: Direct Contact Details */}
           <div className="lg:col-span-5 space-y-8">
             <div>
               <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
@@ -66,14 +89,14 @@ export default function Contact() {
               <div className="flex items-center gap-3">
                 <a
                   href={`mailto:${personalInfo.email}`}
-                  className="inline-flex items-center gap-2 border-b border-primary-foreground/40 pb-1 text-lg sm:text-xl font-medium hover:border-accent hover:text-accent transition-colors"
+                  className="inline-flex items-center gap-2 border-b border-primary-foreground/40 pb-1 text-lg sm:text-xl font-medium hover:border-accent hover:text-accent transition-colors break-all"
                 >
                   <span>{personalInfo.email}</span>
                   <ArrowUpRight className="size-4 text-accent" />
                 </a>
                 <button
                   onClick={() => copyToClipboard(personalInfo.email, 'email')}
-                  className="p-1.5 border border-primary-foreground/20 text-xs font-mono hover:border-accent transition-colors"
+                  className="p-1.5 border border-primary-foreground/20 text-xs font-mono hover:border-accent transition-colors shrink-0"
                   title="Copy email"
                 >
                   {copiedEmail ? <Check className="size-3.5 text-accent" /> : <Copy className="size-3.5" />}
@@ -94,7 +117,7 @@ export default function Contact() {
                 </a>
                 <button
                   onClick={() => copyToClipboard(personalInfo.phone, 'phone')}
-                  className="p-1.5 border border-primary-foreground/20 text-xs font-mono hover:border-accent transition-colors"
+                  className="p-1.5 border border-primary-foreground/20 text-xs font-mono hover:border-accent transition-colors shrink-0"
                   title="Copy phone"
                 >
                   {copiedPhone ? <Check className="size-3.5 text-accent" /> : <Copy className="size-3.5" />}
@@ -107,7 +130,7 @@ export default function Contact() {
                 Base of Operations
               </p>
               <p className="text-sm font-medium text-primary-foreground flex items-center gap-1.5">
-                <MapPin className="size-4 text-accent" />
+                <MapPin className="size-4 text-accent shrink-0" />
                 {personalInfo.address}
               </p>
               <p className="text-xs text-muted-foreground">
@@ -129,20 +152,68 @@ export default function Contact() {
 
           {/* Right Column: Direct Message Form */}
           <div className="lg:col-span-7 bg-background/5 border border-primary-foreground/15 p-6 sm:p-8">
-            <h3 className="text-lg font-medium text-primary-foreground mb-1">
-              Send an architectural inquiry
-            </h3>
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-lg font-medium text-primary-foreground">
+                Send an architectural inquiry
+              </h3>
+              <span className="font-mono text-[10px] uppercase text-accent bg-accent/10 border border-accent/30 px-2 py-0.5">
+                Direct Delivery
+              </span>
+            </div>
             <p className="text-xs text-muted-foreground mb-6 font-mono">
-              Direct communication for consulting, speaking, or implementation.
+              Inquiries are routed directly to Sunil Parajuli&apos;s verified inbox.
             </p>
 
             {status === 'success' ? (
-              <div className="p-6 bg-accent/10 border border-accent text-center space-y-2 font-mono text-xs">
-                <span className="text-accent font-bold block text-sm">Message Client Prepared!</span>
-                <p className="text-primary-foreground">Opening your mail client to dispatch message to {personalInfo.email}.</p>
+              <div className="p-6 bg-accent/15 border border-accent text-center space-y-3 font-mono text-xs animate-in fade-in duration-300">
+                <div className="flex items-center justify-center">
+                  <div className="size-10 rounded-full bg-accent text-accent-foreground flex items-center justify-center">
+                    <Check className="size-5" />
+                  </div>
+                </div>
+                <span className="text-accent font-bold block text-sm">Message Dispatched Successfully!</span>
+                <p className="text-primary-foreground max-w-sm mx-auto leading-relaxed">
+                  Thank you for reaching out. Sunil will review your inquiry and get back to you shortly.
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="px-4 py-2 bg-primary text-primary-foreground border border-primary-foreground/20 hover:border-accent text-[11px] uppercase tracking-wider font-semibold transition-colors"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                
+                {/* Honeypot Bot Trap (Hidden) */}
+                <input
+                  type="text"
+                  name="honeypot"
+                  value={formData.honeypot}
+                  onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                {status === 'error' && (
+                  <div className="p-4 bg-red-500/10 border border-red-500/30 text-xs font-mono flex items-start gap-2.5 text-red-200">
+                    <AlertCircle className="size-4 text-red-400 shrink-0 mt-0.5" />
+                    <div className="space-y-1">
+                      <span className="font-semibold block">{errorMessage}</span>
+                      <button
+                        type="button"
+                        onClick={handleMailtoFallback}
+                        className="underline hover:text-white"
+                      >
+                        Click here to send via your email app instead &rarr;
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground block mb-1">
@@ -175,7 +246,7 @@ export default function Contact() {
 
                 <div>
                   <label className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground block mb-1">
-                    Subject
+                    Subject / Topic
                   </label>
                   <input
                     type="text"
@@ -195,7 +266,7 @@ export default function Contact() {
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe your initiative or architecture inquiry..."
+                    placeholder="Describe your initiative, health informatics scope, or architecture inquiry..."
                     className="w-full px-3.5 py-2.5 bg-primary border border-primary-foreground/20 focus:border-accent focus:outline-none text-primary-foreground text-xs font-mono resize-none"
                   />
                 </div>
@@ -203,10 +274,19 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full py-3 bg-accent hover:bg-accent-hover text-accent-foreground font-mono text-xs uppercase tracking-widest font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 bg-accent hover:bg-accent-hover disabled:opacity-50 text-accent-foreground font-mono text-xs uppercase tracking-widest font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <span>Submit Inquiry</span>
-                  <Send className="size-3.5" />
+                  {status === 'submitting' ? (
+                    <>
+                      <Loader2 className="size-3.5 animate-spin" />
+                      <span>Transmitting Inquiry...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Transmit Message</span>
+                      <Send className="size-3.5" />
+                    </>
+                  )}
                 </button>
               </form>
             )}
