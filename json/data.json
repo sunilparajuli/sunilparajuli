@@ -1,0 +1,209 @@
+{
+  "Projects": [
+    {
+      "show": true,
+      "title": "OCR Document Verification for Social Protection",
+      "desc": [
+        "An AI/OCR-based automated supporting document verification system engineered for social protection and health insurance services, systematically validating documentary evidence against applicant claims.",
+        "Built during the Berlin Hackathon hosted by GIZ Germany at the SAP Data Space (Feb 2026), the engine extracts structured parameters from unstructured uploaded citizen documents and cross-checks them in real-time against application declarations.",
+        "The architecture dramatically reduces manual verification effort by 75%, enhances automated detection of inconsistencies and fraudulent submissions, and provides a standardized API ready for direct integration into openIMIS and national social registries."
+      ],
+      "year": "2026",
+      "preview": "https://openimis.atlassian.net/wiki/spaces/OP/pages/4879515650/openIMIS+Hackathon+2026+-+Berlin+Germany",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "Python",
+        "FastAPI",
+        "OCR / Document AI",
+        "openIMIS",
+        "Docker",
+        "Machine Learning"
+      ],
+      "slug": "berlin-hackathon-2026",
+      "category": [3, 2]
+    },
+    {
+      "show": true,
+      "title": "From Claim to Care: Global Goods Interoperability",
+      "desc": [
+        "A breakthrough digital health architecture and interoperability model presented at the Global Digital Health Forum (GDHF) in Nairobi, Kenya (Dec 2025).",
+        "The solution establishes an end-to-end data exchange pipeline connecting Community Health Worker (CHW) frontline feedback with health financing and insurance systems using openIMIS as the central catalyst for interoperability.",
+        "Designed to accelerate Universal Health Coverage (UHC), the architecture links care delivery with claims adjudication, giving ministries of health and international donors real-time visibility into healthcare service delivery and financing."
+      ],
+      "year": "2025",
+      "preview": "https://sunilparajuli.com",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "openIMIS",
+        "HL7 FHIR",
+        "openHIE",
+        "CHW Ecosystems",
+        "Digital Health Standards"
+      ],
+      "slug": "gdhf-nairobi-2025",
+      "category": [1, 2]
+    },
+    {
+      "show": true,
+      "title": "openCRVS × openIMIS Interoperability Pipeline",
+      "desc": [
+        "An end-to-end interoperability implementation connecting civil registration (openCRVS) with national health insurance (openIMIS) under the GIZ Support to Health Sector Strategy (S2HSS).",
+        "Configured openHIM mediator for secure transaction routing, logging, and automated syncing of vital event updates (births, deaths, demographic transitions) directly into health insurance registries.",
+        "Implemented Digital Convergence Initiative (DCI) APIs, HL7 FHIR protocols, and openHIE architectural guidelines, eliminating manual dual-entry and accelerating newborn health coverage enrollment."
+      ],
+      "year": "2024",
+      "preview": "https://sunilparajuli.com",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "openHIM",
+        "openCRVS",
+        "openIMIS",
+        "HL7 FHIR",
+        "DCI APIs",
+        "openHIE",
+        "Python"
+      ],
+      "slug": "opencrvs-openimis-interoperability",
+      "category": [2, 1]
+    },
+    {
+      "show": true,
+      "title": "Legacy to Modular openIMIS Architecture Migration",
+      "desc": [
+        "Spearheading the comprehensive architectural migration of national openIMIS installations from a monolithic legacy stack to a modern, decoupled microservice paradigm.",
+        "Engineered decoupled modules for contributor management, claims adjudication, and reporting with high availability and throughput for multi-tier national infrastructure.",
+        "Ensured zero-downtime transition, backward data compatibility across millions of beneficiary records, and standardized REST/GraphQL interfaces for third-party hospital EHRs."
+      ],
+      "year": "2025",
+      "preview": "https://sunilparajuli.com",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "Python",
+        "Django",
+        "ReactJS",
+        "PostgreSQL",
+        "Docker",
+        "Microservices"
+      ],
+      "slug": "openimis-modular-migration",
+      "category": [1, 4]
+    },
+    {
+      "show": true,
+      "title": "Social Security Fund Nepal Enterprise Automation",
+      "desc": [
+        "Enterprise-scale module development and system customization for the Social Security Fund (SSF) of Nepal in partnership with the International Labour Organization (ILO).",
+        "Architected and deployed full-lifecycle operational modules: Formal Sector Contributor Registration, Payment Collection, Grievance Handling, Medical/Non-Medical Claims, Investment, and Loan Management.",
+        "Engineered automated duplicate claims detection rules across facilities and supported HL7 FHIR integration between hospital Electronic Health Record (EHR) systems and SSF."
+      ],
+      "year": "2024",
+      "preview": "https://sunilparajuli.com",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "Django",
+        "VB.NET",
+        "IIS",
+        "ReactJS",
+        "PostgreSQL",
+        "HL7 FHIR"
+      ],
+      "slug": "ssf-nepal-automation",
+      "category": [3, 4]
+    },
+    {
+      "show": true,
+      "title": "Lao PDR National Health Insurance System Analysis",
+      "desc": [
+        "Technical requirement analysis, stakeholder alignment, and system customization mapping for the Ministry of Health (MoH) Lao PDR in collaboration with the Asia eHealth Information Network (AeHIN) and WHO.",
+        "Led detailed stakeholder workshops with the Ministry of Health and technical teams to adapt international digital health standards to the Lao national health strategy.",
+        "Demonstrated and configured openIMIS for digital claims submission, automated verification workflows, beneficiary tracking, and executive analytics."
+      ],
+      "year": "2024",
+      "preview": "https://sunilparajuli.com",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "openIMIS",
+        "Health Financing Analytics",
+        "Workflow Automation",
+        "Policy Modeling"
+      ],
+      "slug": "laos-health-insurance",
+      "category": [1, 2]
+    },
+    {
+      "show": true,
+      "title": "Sarovara On-Demand E-Commerce & Mobile Logistics",
+      "desc": [
+        "A full-stack on-demand product ordering and logistics platform developed for Grantha Technology.",
+        "Built cross-platform iOS and Android applications using Flutter alongside a high-performance backend with Django REST framework and PostgreSQL.",
+        "Features geofenced store dispatching, live delivery tracking, payment gateway integration, and real-time inventory management."
+      ],
+      "year": "2020",
+      "preview": "https://sunilparajuli.com",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "Django",
+        "Flutter",
+        "PostgreSQL",
+        "Google Maps API",
+        "Redis",
+        "FCM"
+      ],
+      "slug": "sarovara-ecommerce",
+      "category": [4]
+    },
+    {
+      "show": true,
+      "title": "Government ICT Infrastructure & Systems Design",
+      "desc": [
+        "Long-term ICT engineering and systems consultancy for the Office of the Attorney General, Government of Nepal.",
+        "Formulated government IT operational guidelines, systems architecture, and security specifications for legal case tracking.",
+        "Deployed and administered high-availability VMware virtualization clusters, Linux server farms, and secure Windows Server infrastructure."
+      ],
+      "year": "2025",
+      "preview": "https://sunilparajuli.com",
+      "code": "https://github.com/sunilparajuli",
+      "thumbnail": "/image/projects.png",
+      "images": [
+        "/image/projects.png"
+      ],
+      "tech": [
+        "VMware ESXi",
+        "Linux Server",
+        "Windows Server",
+        "Network Security",
+        "IT Governance"
+      ],
+      "slug": "attorney-general-ict",
+      "category": [4]
+    }
+  ]
+}
