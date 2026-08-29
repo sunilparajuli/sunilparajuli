@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { personalInfo } from '../data/portfolioData';
 import StructuredData from '../components/StructuredData';
@@ -122,6 +123,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased text-foreground bg-background selection:bg-accent selection:text-accent-foreground">
         {children}
+        <Analytics />
       </body>
     </html>
   );
