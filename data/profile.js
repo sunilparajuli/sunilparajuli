@@ -1,5 +1,7 @@
 export const profile = {
   name: "Sunil Parajuli",
+  linkedin: "https://www.linkedin.com/in/sunil-parajuli-a49102b7/",
+  photo: "/image/sunil-parajuli.jpg",
   title: "Social Security & Social Protection Professional",
   email: "sunilparajuli2002@gmail.com",
   phone: "+9779849298499",

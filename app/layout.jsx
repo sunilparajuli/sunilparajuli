@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { profile } from "@/data/profile";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
@@ -110,7 +111,8 @@ const jsonLd = {
     "Next.js",
     "PostgreSQL",
   ],
-  sameAs: ["https://github.com/sunilparajuli"],
+  image: new URL(profile.photo, baseUrl).href,
+  sameAs: ["https://github.com/sunilparajuli", profile.linkedin],
 };
 
 export default function RootLayout({ children }) {

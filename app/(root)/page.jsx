@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import SelectedWork from "@/components/SelectedWork";
 import Footer from "@/components/Footer";
 import { profile } from "@/data/profile";
@@ -27,16 +28,25 @@ export default function Home() {
                   Download CV ↓
                 </a>
               </div>
+              <a className="text-link" href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+                Connect on LinkedIn ↗
+              </a>
               <p className="hero-location">
                 <span /> Based in Kathmandu · Working across borders
               </p>
             </div>
-            <div className="hero-art" aria-hidden="true">
+            <div className="hero-art">
               <span className="vertical-label">POLICY MEETS PRACTICE</span>
               <div className="hero-disc">
-                <span>
-                  SP<span className="coral">.</span>
-                </span>
+                <Image
+                  src={profile.photo}
+                  alt="Sunil Parajuli"
+                  width={400}
+                  height={400}
+                  sizes="(max-width: 650px) 245px, (max-width: 900px) 270px, 360px"
+                  className="hero-portrait"
+                  priority
+                />
               </div>
               <div className="hero-note">
                 <small>MY FOCUS</small>
