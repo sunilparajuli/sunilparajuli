@@ -1,9 +1,8 @@
 import Footer from "@/components/Footer";
-
 export const metadata = {
-  title: "Projects | Alvalens",
+  title: "Projects",
   description:
-    "Selected projects spanning web development, AI/ML, and more. Built with Next.js, Spring Boot, Python, and modern frameworks.",
+    "Selected social protection, health insurance, and public-sector technology projects by Sunil Parajuli.",
 };
 export default function Layout({ children }) {
   return (
