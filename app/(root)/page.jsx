@@ -3,6 +3,9 @@ import Image from "next/image";
 import SelectedWork from "@/components/SelectedWork";
 import Footer from "@/components/Footer";
 import { profile } from "@/data/profile";
+import { pageMetadata, siteTitle, siteDescription } from "@/lib/seo";
+export const metadata = pageMetadata(siteTitle, siteDescription, "/");
+
 export default function Home() {
   return (
     <>

@@ -8,90 +8,25 @@ import { Analytics } from "@vercel/analytics/react";
 
 import ClientTopProgressBar from "@/components/ClientTopProgressBar";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sunilparajuli.com";
+import { siteUrl, siteTitle, siteDescription } from "@/lib/seo";
 
+const baseUrl = siteUrl;
 export const metadata = {
   metadataBase: new URL(baseUrl),
-  title: {
-    default:
-      "Sunil Parajuli — Social Security & Social Protection Professional",
-    template: "%s | Sunil Parajuli",
-  },
-  description:
-    "Portfolio of Sunil Parajuli — Solution Architect & Social Protection Technologist with 9+ years engineering national-scale openIMIS health insurance, HL7 FHIR interoperability pipelines, and digital public goods.",
-  author: "Sunil Parajuli",
-  siteUrl: baseUrl,
+  title: { default: siteTitle, template: "%s | Sunil Parajuli" },
+  description: siteDescription,
+  authors: [{ name: profile.name, url: profile.linkedin }],
   applicationName: "Sunil Parajuli Portfolio",
-  keywords: [
-    "Sunil Parajuli",
-    "Solution Architect",
-    "openIMIS",
-    "openIMIS Architecture",
-    "HL7 FHIR",
-    "FHIR Interoperability",
-    "Digital Public Goods",
-    "DPG",
-    "openCRVS",
-    "openHIM",
-    "openHIE",
-    "Digital Convergence Initiative",
-    "DCI APIs",
-    "Health Informatics Nepal",
-    "Social Security Fund Nepal",
-    "Health Insurance Board Nepal",
-    "e-Governance Nepal",
-    "Machine Learning False Claims Detection",
-    "GIZ Germany",
-    "ILO Social Security",
-    "Python Django Architect",
-  ],
-  openGraph: {
-    type: "profile",
-    firstName: "Sunil",
-    lastName: "Parajuli",
-    username: "sunilparajuli",
-    gender: "male",
-    locale: "en_US",
-    url: baseUrl,
-    title: "Sunil Parajuli — Social Security & Social Protection Professional",
-    description:
-      "Engineering Digital Public Infrastructure, national-scale openIMIS health insurance architectures, and FHIR interoperability ecosystems.",
-    siteName: "Sunil Parajuli — Professional Portfolio",
-    images: [
-      {
-        url: "/og-image-square.png",
-        alt: "Sunil Parajuli — Social Security & Social Protection Professional",
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sunil Parajuli — Social Security & Social Protection Professional",
-    description:
-      "Engineering Digital Public Infrastructure, national-scale openIMIS health insurance architectures, and FHIR interoperability ecosystems.",
-    creator: "@sunilparajuli",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${baseUrl}/#person`,
   name: "Sunil Parajuli",
   url: baseUrl,
   jobTitle: "Social Security & Social Protection Professional",
-  worksFor: [
-    { "@type": "Organization", name: "Tinker Technology Pvt. Ltd." },
-    {
-      "@type": "Organization",
-      name: "Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ)",
-    },
-  ],
   alumniOf: [
     { "@type": "CollegeOrUniversity", name: "Nepal Open University" },
     { "@type": "CollegeOrUniversity", name: "Kathmandu University" },
@@ -121,7 +56,7 @@ export default function RootLayout({ children }) {
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
       </head>
       <body id="top">

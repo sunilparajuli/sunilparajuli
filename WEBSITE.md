@@ -17,3 +17,9 @@ The design reinterprets the Steve portfolio template by Colorlib in React: promi
 Use Node.js 22. Run `npm ci`, then `npm run dev`. Run `npm run build` before pushing. Import this repository into Vercel with the Next.js preset; the build command is `npm run build`. No database environment variables are needed. Contact links open the visitor’s email or phone application. The legacy contact API is unused by the new pages.
 
 All content changes are made in the repository and become visible after the connected Vercel deployment succeeds. Admin editing and a database are deferred.
+
+## Search engine metadata
+
+`lib/seo.js` centralizes page titles, descriptions, canonical URLs, and sharing cards. `app/sitemap.js` includes the homepage, about page, project listing, and every visible project. `app/robots.js` advertises the sitemap. Both are generated during the build.
+
+The production origin defaults to `https://sunilparajuli.com`. Set `NEXT_PUBLIC_SITE_URL` in Vercel to your preferred production origin if different, then redeploy. All canonical and sitemap URLs use that origin. After deployment, verify ownership in Google Search Console and submit `/sitemap.xml`; this repository does not perform Search Console verification or guarantee indexing.
