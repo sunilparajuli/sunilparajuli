@@ -36,6 +36,7 @@ export default function Navbar() {
             ["/#expertise", "Expertise"],
             ["/#work", "Selected work"],
             ["/about", "About"],
+            ["/blog", "Blog"],
           ].map(([href, label]) => (
             <Link key={href} href={href} onClick={() => setOpen(false)}>
               {label}

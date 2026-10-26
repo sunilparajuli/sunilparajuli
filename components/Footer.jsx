@@ -19,7 +19,11 @@ export default function Footer() {
           <div className="contact-links">
             <a href={`mailto:${profile.email}`}>{profile.email} ↗</a>
             <a href={`tel:${profile.phone}`}>+977 9849298499</a>
-            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Connect on LinkedIn ↗
             </a>
             <p>{profile.location}</p>
@@ -40,6 +44,7 @@ export default function Footer() {
             <a href="https://technext.github.io/steve/index.html">Steve</a> /{" "}
             <a href="https://colorlib.com">Colorlib</a>
           </span>
+          <a href="/admin">Admin</a>
           <a href="#top">Back to top ↑</a>
         </div>
       </div>

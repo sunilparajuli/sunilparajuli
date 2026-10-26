@@ -1,6 +1,6 @@
 # Website maintenance
 
-This is a Next.js portfolio with static content, ready for GitHub → Vercel deployment. No database or admin login is required.
+This is a Next.js portfolio with static content, ready for GitHub → Vercel deployment. The portfolio remains static; the blog and admin desk use PostgreSQL. See `database/README.md` for configuration.
 
 ## Edit content
 
@@ -14,9 +14,9 @@ The design reinterprets the Steve portfolio template by Colorlib in React: promi
 
 ## Run and deploy
 
-Use Node.js 22. Run `npm ci`, then `npm run dev`. Run `npm run build` before pushing. Import this repository into Vercel with the Next.js preset; the build command is `npm run build`. No database environment variables are needed. Contact links open the visitor’s email or phone application. The legacy contact API is unused by the new pages.
+Use Node.js 22. Run `npm ci`, then `npm run dev`. Run `npm run build` before pushing. Import this repository into Vercel with the Next.js preset; the build command is `npm run build`. The portfolio needs no database; blog/admin routes require the database environment variables documented in `database/README.md`. Contact links open the visitor’s email or phone application. The legacy contact API is unused by the new pages.
 
-All content changes are made in the repository and become visible after the connected Vercel deployment succeeds. Admin editing and a database are deferred.
+All content changes are made in the repository and become visible after the connected Vercel deployment succeeds. Blog drafts are edited at `/admin`; portfolio content remains repository-managed.
 
 ## Search engine metadata
 
